@@ -1,0 +1,4 @@
+image_splitter:
+  ros__parameters:
+    hz: 0.0
+    save_dir_path: "/home/amsl/colcon_ws/src/human_tracking_using_robots/bagfiles/fox/images/alone1"

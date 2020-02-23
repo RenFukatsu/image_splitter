@@ -1,5 +1,6 @@
 cmake_minimum_required(VERSION 3.5)
 project(image_splitter)
+SET(CMAKE_CXX_FLAGS "-std=c++14 -O2 -g -Wall ${CMAKE_CXX_FLAGS}")
 
 # Default to C99
 if(NOT CMAKE_C_STANDARD)
@@ -20,6 +21,27 @@ find_package(ament_cmake REQUIRED)
 find_package(rclcpp REQUIRED)
 find_package(cv_bridge REQUIRED)
 find_package(sensor_msgs REQUIRED)
+
+include_directories(
+  include
+)
+
+add_executable(image_splitter src/image_splitter.cpp)
+ament_target_dependencies(image_splitter
+  rclcpp
+  sensor_msgs
+  cv_bridge
+)
+
+install(TARGETS
+  image_splitter
+  DESTINATION lib/${PROJECT_NAME}
+)
+
+install(DIRECTORY
+  launch
+  DESTINATION share/${PROJECT_NAME}
+)
 
 if(BUILD_TESTING)
   find_package(ament_lint_auto REQUIRED)

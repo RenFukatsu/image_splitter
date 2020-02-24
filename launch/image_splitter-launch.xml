@@ -1,0 +1,9 @@
+<launch>
+  <let name="path" value="/home/amsl/colcon_ws/src/human_tracking_using_robots/bagfiles/viera" />
+  <let name="image_topic" value="/viera_relative_points/image" />
+  <node pkg="image_splitter" exec="image_splitter" output="screen">
+    <param name="hz" value="0.0" />
+    <param name="save_dir_path" value="$(var path)/images/alone1"/>
+    <remap from="image" to="$(var image_topic)"/>
+  </node>
+</launch>

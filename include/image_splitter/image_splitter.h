@@ -8,6 +8,7 @@
 #include <opencv2/opencv.hpp>
 #include <cv_bridge/cv_bridge.h>
 #include <dirent.h>
+#include <sys/stat.h>
 
 class ImageSplitter : public rclcpp::Node
 {
@@ -17,7 +18,8 @@ public:
 private:
     void image_callback(const sensor_msgs::msg::Image::SharedPtr image_msg);
     void timer_callback();
-    bool convert_ros_image_to_cv_image(const sensor_msgs::msg::Image& ros_image, cv::Mat cv_image);
+    bool mkdir_recursion(const std::string path);
+    bool convert_ros_image_to_cv_image(const sensor_msgs::msg::Image &ros_image, cv::Mat &cv_image);
     double get_time();
     void save_image(cv::Mat& image, std::string save_dir_path, double time_stamp);
     std::string padding_0(int num, int digit);

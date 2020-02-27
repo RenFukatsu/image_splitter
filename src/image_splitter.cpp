@@ -94,18 +94,19 @@ bool ImageSplitter::convert_ros_image_to_cv_image(const sensor_msgs::msg::Image&
 
 void ImageSplitter::save_image(cv::Mat& image, std::string dir_path, double time_stamp)
 {
-    static int count = 0;
+    static int count = 1;
     if(image.empty())
     {
         std::cerr << "image is empty" << std::endl;
         return;
     }
 
-    static const int padding_digit = 4;
-    std::string save_name = dir_path + "image" + padding_0(count, padding_digit) + "_" + std::to_string(time_stamp) + ".jpg";
+    static const int padding_digit = 6;
+    std::string save_name = dir_path + padding_0(count, padding_digit) + ".jpg";
 
     cv::imwrite(save_name, image);
-    std::cout << "save image: " << save_name << std::endl;
+    std::cout << "save image: " << padding_0(count, padding_digit) << ".jpg";
+    std::cout << "\t time: " << time_stamp << std::endl;
     count++;
     image.release();
 }
